@@ -2,12 +2,12 @@
     <div>
         <el-container>
             <el-aside width="200px">
-                <CommonAside/>
+                <CommonAside />
             </el-aside>
             <el-container>
                 <el-header>Header</el-header>
                 <el-main>
-                     <!-- 路由出口 -->
+                    <!-- 路由出口 -->
                     <!-- 路由匹配到的组件将渲染在这里 -->
                     <router-view></router-view>
                 </el-main>
@@ -16,14 +16,14 @@
     </div>
 </template>
 
-<script>
-import CommonAside from '../components/CommonAside.vue' 
-export default{
-    data(){
-        return{}
-    },
-    components: {
-        CommonAside
-    }
-}
+<script setup>
+import CommonAside from '../components/CommonAside.vue'
+// export default {
+//     data () {
+//         return {}
+//     },
+//     components: {
+//         CommonAside
+//     }
+// }
 </script>
