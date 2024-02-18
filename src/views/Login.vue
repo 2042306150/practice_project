@@ -13,8 +13,10 @@
     </el-form>
 </template>
 <script>
-import  Mock  from 'mock.js';
+import Mock from 'mockjs'
 import Cookies from 'js-cookie';
+import permission from '/api/mockServeData/permission';
+
 export default {
     data(){
         return{
