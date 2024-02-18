@@ -15,44 +15,45 @@
 <script>
 import Mock from 'mockjs'
 import Cookies from 'js-cookie';
-import permission from '/api/mockServeData/permission';
+// import permission from '/api/mockServeData/permission';
+import { getMenu } from '../api'
 
 export default {
-    data(){
-        return{
-            form:{
+    data () {
+        return {
+            form: {
                 username: '',
                 password: ''
             },
-            rules:{
-                username:[
-                    {require: true,trigger:'blur',message:'请输入用户名'}
+            rules: {
+                username: [
+                    { require: true, trigger: 'blur', message: '请输入用户名' }
                 ],
-                password:[
-                    {require: true,trigger:'blur',message:'请输入密码'}
+                password: [
+                    { require: true, trigger: 'blur', message: '请输入密码' }
                 ]
             }
         }
     },
-    methods:{
+    methods: {
         //登录
-        submit(){
+        submit () {
             //token信息
             //const token = Mock.Random.guid()
             //token信息存入cookie用于不同页面间的通信
             //Cookie.set('token',token)
-            
+
             //校验通过
             this.$refs.form.validate((valid) => {
-                if(valid) {
-                    getMenu(this.form).then(({data}) => {
-                        if(data.code ==20000){
-                        Cookies.set('token', data.data.token)
-                        //跳转到首页
-                        this.$router.push('/home')
-                    }else{
-                        this.$message.error(data.data.$message)
-                    }
+                if (valid) {
+                    getMenu(this.form).then(({ data }) => {
+                        if (data.code == 20000) {
+                            Cookies.set('token', data.data.token)
+                            //跳转到首页
+                            this.$router.push('/home')
+                        } else {
+                            this.$message.error(data.data.$message)
+                        }
                     })
                 }
             })
@@ -70,12 +71,14 @@ export default {
     border-radius: 15px;
     box-shadow: 0 0 25px #cac6c6;
     box-sizing: border-box;
+
     .login_title {
         text-align: center;
         margin-bottom: 40px;
         color: #505458;
     }
-    .el-input{
+
+    .el-input {
         width: 198px;
     }
 }
