@@ -28,6 +28,7 @@ export default {
         ...mapMutations(['closeTag']),
         //点击tag跳转的功能
         changeMenu(item){
+            console.log('tabList',state.tab.tabList)
             this.$router.push({name: item.name })
         },
         //点击tag删除的功能

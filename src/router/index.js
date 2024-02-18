@@ -6,6 +6,7 @@ import Main from '../views/Main.vue'
 import Mall from '../views/Mall.vue'
 import PageOne from '../views/PageOne.vue'
 import PageTwo from '../views/PageTwo.vue'
+import Login from  '../views/Login.vue'
 Vue.use(VueRouter)
 //1.创建路由组件
 //2.将路由与组件进行映射
@@ -26,8 +27,12 @@ const routes = [
 
         ]
     },
-    { path: '/home', component: Home },
-    { path: '/user', component: User }
+    {
+      path: '/login',
+      component:Login
+    }
+    // { path: '/home', component: Home },
+    // { path: '/user', component: User }
   ]
 
 //3.创建router实例
