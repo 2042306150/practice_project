@@ -14,16 +14,9 @@
 </template>
 <script>
 import Mock from 'mockjs'
-<<<<<<< HEAD
-import Cookie from 'js-cookie';
+import Cookies from 'js-cookie';
 //import permission from '/api/mockServeData/permission';
 import { getMenu } from '@/api';
-=======
-import Cookies from 'js-cookie';
-// import permission from '/api/mockServeData/permission';
-import { getMenu } from '../api'
-
->>>>>>> c0bfdbccbf4ccc0f9f696c0345ec5c38cb772b15
 export default {
     data () {
         return {
@@ -51,21 +44,6 @@ export default {
 
             //校验通过
             this.$refs.form.validate((valid) => {
-<<<<<<< HEAD
-                if(valid) {
-                    getMenu(this.form).then(({data}) => {
-                        if(data.code ===20000){
-                        //token信息存入cookie用于不同页面通信
-                        Cookie.set('token', data.data.token)
-                        //获取菜单数据，存入store
-                        this.$store.commit('setMenu',data.data.menu)
-                        this.$store.commit('addMenu',this.$router)
-                        //跳转到首页
-                        this.$router.push('/home')
-                    }else{
-                        this.$message.error(data.data.message)
-                    }
-=======
                 if (valid) {
                     getMenu(this.form).then(({ data }) => {
                         if (data.code == 20000) {
@@ -75,7 +53,6 @@ export default {
                         } else {
                             this.$message.error(data.data.$message)
                         }
->>>>>>> c0bfdbccbf4ccc0f9f696c0345ec5c38cb772b15
                     })
                 }
             })
