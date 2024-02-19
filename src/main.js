@@ -7,7 +7,7 @@ import VueRouter from 'vue-router';
 import store from './store'
 import './api/mock'
 // import { nextTick } from 'vue/types/umd';
-import Cookies from 'js-cookie';
+import Cookie from 'js-cookie';
 
 Vue.config.productionTip = false
 
@@ -17,7 +17,7 @@ Vue.use(ElementUI)
 //添加全局前置导航守卫
 router.beforeEach((to,from,next) => {
   //判断token存不存在
-  const token = Cookies.get('token')
+  const token = Cookie.get('token')
   //token不存在，说明当前用户未登录，跳转到登录页
   if(!token && to.name !== 'login'){
     next({name: 'login'})
@@ -32,4 +32,7 @@ new Vue({
   router,
   store,
   render: h => h(App),
+  created(){
+    store.commit('addMenu',router)
+  }
 }).$mount('#app')

@@ -22,7 +22,7 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-import Cookies from 'js-cookie';
+import Cookie from 'js-cookie';
 export default{
     data(){
         return{}
@@ -32,11 +32,13 @@ export default{
             this.$store.commit('collapseMenu')
         },
         handleClick(command){
-            //清除cookie中的token
+            //清除cookie中的tokens
            if(command === 'cancel'){
             console.log('登出')
             //清除cookie中的token
             Cookie.remove('token')
+            //清楚cookie中的menu
+            Cookie.remove('menu')
             //跳转到登录页
             this.$router.push('/login')
         }
