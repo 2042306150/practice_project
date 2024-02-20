@@ -12,5 +12,10 @@ import HelloWorld from './components/HelloWorld.vue'
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   color: #2c3e50;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  max-width: 100%;
 }
 </style>

@@ -2,11 +2,12 @@
     <el-header>
         <div class="l-content">
             <!-- 图标展示 -->
-            <el-button size="small">
-                <el-icon>
+            <el-button size="small" plain @click="handleCollapse">
+                <el-icon :size="20">
                     <Grid />
                 </el-icon>
             </el-button>
+            <h3>首页</h3>
         </div>
         <div class="r-content">
             <el-dropdown>
@@ -28,16 +29,24 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue-demi';//vue-demi
+import { useStore } from 'vuex';
+export default defineComponent ({
     setup () {
-        const getImgSrc = (user) => {
-            return new URL(`../assets/${user}.png`, import.meta.url).href;
+        let store = useStore()
+        let getImgSrc = (user) => {
+            return new URL(`../assets/images/${user}.png`, import.meta.url).href;
+        };
+        let handleCollapse = () => {
+            //调用vuex中的mutation
+            store.commit('updateIsCollapse');
         }
         return {
             getImgSrc,
+            handleCollapse,
         };
     },
-};
+});
 </script>
 
 <style lang="less" scoped>
@@ -45,7 +54,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
+    width: 100%;
+    background: #333;
 }
 
 .r-content {
@@ -53,6 +63,16 @@ header {
         width: 40px;
         height: 40px;
         border-radius: 50%;
+    }
+}
+.l-content{
+    display: flex;
+    align-items: center;
+    .el-button{
+        margin-right: 20px;
+    }
+    h3{
+        color: #fff;
     }
 }
 </style>
