@@ -7,7 +7,13 @@
                     <Grid />
                 </el-icon>
             </el-button>
-            <h3>首页</h3>
+            <h3> 
+                <el-breadcrumb separator="/" class="bread">
+                    <!--首页一定存在，写死-->
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="current.path" v-if="current">{{current.label}}</el-breadcrumb-item>                
+                </el-breadcrumb>
+            </h3>
         </div>
         <div class="r-content">
             <el-dropdown>
@@ -20,7 +26,7 @@
                 <template #dropdown>
                     <el-dropdown-menu>
                         <el-dropdown-item>个人中心</el-dropdown-item>
-                        <el-dropdown-item>退出</el-dropdown-item>
+                        <el-dropdown-item @click="handleLoginOut">退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -29,7 +35,8 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue-demi';//vue-demi
+import { defineComponent,computed } from 'vue-demi';//vue-demi
+import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 export default defineComponent ({
     setup () {
@@ -40,10 +47,23 @@ export default defineComponent ({
         let handleCollapse = () => {
             //调用vuex中的mutation
             store.commit('updateIsCollapse');
+        };
+        //计算属性
+        const current = computed(()=>{
+            return store.state.currentMenu;
+        });
+        const router = useRouter()
+        const handleLoginOut =()=>{
+            store.commit('cleanMenu');
+            router.push({
+                name:"login",
+            })
         }
         return {
             getImgSrc,
             handleCollapse,
+            current,
+            handleLoginOut
         };
     },
 });
@@ -74,5 +94,9 @@ header {
     h3{
         color: #fff;
     }
+}
+:deep(.bread span) {
+    color: #fff !important;
+    cursor: pointer !important;
 }
 </style>

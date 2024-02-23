@@ -18,5 +18,28 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 app.config.globalProperties.$api =api//调用mock接口用de
 app.use(router).use(store)
+store.commit("addMenu",router);
+function checkRouter(path){
+  let hasCheck =router.getRoutes().filter(route => route.path == path).length
+  if(hasCheck){
+    return true
+  }else {
+    return false
+  }
+}
+//checkRouter()
+
+router.beforeEach((to,from,next)=>{
+  store.commit('getToken')
+  const token = store.state.token
+  if(!token && to.name !== 'login'){
+    next({name:'login'})
+  }else if (!checkRouter(to.path)){
+    next({ name:'home' })
+  }
+  else {
+    next()
+  }
+})
 //app.use(router)
 app.mount('#app')

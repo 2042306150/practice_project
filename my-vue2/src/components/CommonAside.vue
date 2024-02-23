@@ -44,8 +44,10 @@
 
   <script>
   import { useRouter } from 'vue-router';
+  import { useStore } from 'vuex';
   export default {
     setup(){
+      const store =useStore();
       const  list = [{
           path: '/user',
           name: 'user',
@@ -76,15 +78,19 @@
         }];
       const router = useRouter();
       const noChildren = () => {
-        return list.filter((item) => !item.children);
+        return asyncList.filter((item) => !item.children);
       };
       const hasChildren = () => {
-        return list.filter((item) => item.children);
+        return asyncList.filter((item) => item.children);
       };
+      const asyncList = store.state.menu
       const clickMenu =(item)=>{
         router.push({
           name:item.name,
-        })
+        });
+        //提交selectmenu的值到store里
+        store.commit('selectMenu',item);
+
       }
 
       return {

@@ -4,6 +4,7 @@ const routes = [
     {
         path: '/',
         component:()=>import('../views/Main.vue'),
+        name:'home1',
         redirect:'/home',
         children:[
             {
@@ -27,6 +28,12 @@ const routes = [
                 component:()=>import('../views/Page2.vue')
             },
         ]
+        //children = []
+    },
+    {
+        path:'/login',
+        name:'login',
+        component:()=>import('../views/Login.vue')
     }
 ]
 
